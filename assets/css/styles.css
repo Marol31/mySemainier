@@ -1,0 +1,28 @@
+form.bootstrap-form-with-validation{
+  width:80%;
+  margin:auto;
+}
+
+div.form-group.has-success{
+}
+
+div.radio{
+  float:left;
+}
+
+label.control-label{
+  clear:both;
+}
+
+p.form-static-control{
+  clear:both;
+}
+
+label.control-label{
+  float:left;
+}
+
+button.btn.btn-primary{
+  margin-top:20px;
+}
+
