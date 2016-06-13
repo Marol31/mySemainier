@@ -15,7 +15,7 @@
 }
 
 .custom-header a.navbar-brand.navbar-link span{
-  color:#bc40df;
+  color:#e9ac09;
 }
 
 .custom-header ul.nav.navbar-nav.links li a{
@@ -97,4 +97,3 @@ img.dropdown-image{
 .custom-header .dropdown ul li.active a{
   color:#e9ac09 !important;
 }
-
