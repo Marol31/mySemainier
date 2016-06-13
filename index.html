@@ -44,92 +44,92 @@
         <p class="text-center">Remplissez vos rendez-vous, vos taches ou tout ce dont vous devez vous rappeller pour votre semaine et imprimez-le. </p>
         <footer>En quelques clics, planifiez votre emploi du temps ou celui de vos proches et mettez-le en vue pour organiser au plus juste votre semaine !</footer>
     </blockquote>
-    <form class="bootstrap-form-with-validation">
-        <h2 class="text-center">Remplissez votre semaine:</h2>
-        <div class="form-group"></div>
-        <label for="titre">Donnez un titre</label>
-        <input class="form-control" type="text" name="titre">
-        <div class="form-group"></div>
-        <label for="jour">Choisissez le jour</label>
-        <select class="form-control" required="" name="jour">
-            <optgroup label="Choisissez le jour">
-                <option value="lundi" selected="">Lundi</option>
-                <option value="mardi">Mardi</option>
-                <option value="mercredi">Mercredi</option>
-                <option value="jeudi">Jeudi</option>
-                <option value="vendredi">Vendredi</option>
-                <option value="samedi">Samedi</option>
-                <option value="dimanche">Dimanche</option>
-            </optgroup>
-        </select>
-        <div class="form-group"></div>
-        <label>Précisez un niveau d'importance</label>
-        <select class="form-control">
-            <optgroup label="Niveau d'importance">
-                <option value="pas" selected="">peu important</option>
-                <option value="normal">normal</option>
-                <option value="important">Impératif</option>
-            </optgroup>
-        </select>
-        <div class="form-group"></div>
-        <label>Indiquez votre rappel, votre tache ou votre RDV</label>
-        <div class="form-group has-warning">
-            <textarea class="form-control input-sm" required="" maxlength="150"></textarea>
-            <button class="btn btn-primary" type="submit">Ajouter</button>
-        </div>
-        <div class="form-group"></div>
-        <div class="form-group"></div>
-    </form>
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Lundi </th>
-                        <th>Mardi </th>
-                        <th>Mercredi </th>
-                        <th>Jeudi </th>
-                        <th>Vendredi </th>
-                        <th>Samedi </th>
-                        <th>Dimanche </th>
-                        <th>Column 8</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cell 1</td>
-                        <td>Cell 2</td>
-                        <td>Cell 3</td>
-                        <td>Cell 4</td>
-                        <td>Cell 5</td>
-                        <td>Cell 1</td>
-                        <td>Cell 2</td>
-                        <td>Cell 8</td>
-                    </tr>
-                    <tr>
-                        <td>Cell 1</td>
-                        <td>Cell 2</td>
-                        <td>Cell 3</td>
-                        <td>Cell 4</td>
-                        <td>Cell 5</td>
-                        <td>Cell 6</td>
-                        <td>Cell 7</td>
-                        <td>Cell 8</td>
-                    </tr>
-                    <tr>
-                        <td>Cell 1</td>
-                        <td>Cell 2</td>
-                        <td>Cell 3</td>
-                        <td>Cell 4</td>
-                        <td>Cell 5</td>
-                        <td>Cell 6</td>
-                        <td>Cell 7</td>
-                        <td>Cell 8</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+        <form class="bootstrap-form-with-validation">
+            <h2 class="text-center">Remplissez votre semaine:</h2>
+            <label for="titre">Rentrez la semaine concernée :</label>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <label for="date_debut" class="control-label">Semaine du :</label>
+                                <input type="date" name="date_debut" class="form-control" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <label for="date_fin" class="control-label">Au :</label>
+                                <input type="date" name="date_fin" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label for="jour">Choisissez le jour</label>
+            <select required class="form-control" name="jour">
+                <optgroup label="Choisissez le jour">
+                    <option value="lundi" selected>Lundi</option>
+                    <option value="mardi">Mardi</option>
+                    <option value="mercredi">Mercredi</option>
+                    <option value="jeudi">Jeudi</option>
+                    <option value="vendredi">Vendredi</option>
+                    <option value="samedi">Samedi</option>
+                    <option value="dimanche">Dimanche</option>
+                </optgroup>
+            </select>
+            <div class="form-group"></div>
+            <label>Précisez un niveau d&#39;importance</label>
+            <select class="form-control">
+                <optgroup label="Niveau d&#39;importance">
+                    <option value="pas" selected>peu important</option>
+                    <option value="normal">normal</option>
+                    <option value="important">Impératif</option>
+                </optgroup>
+            </select>
+            <div class="form-group"></div>
+            <label>Indiquez votre rappel, votre tache ou votre RDV</label>
+            <div class="form-group has-warning">
+                <textarea required maxlength="150" class="form-control input-sm"></textarea>
+                <button class="btn btn-primary" type="submit">Ajouter</button>
+            </div>
+        </form>
     </div>
+</div>
+<div class="row">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+    <h3>Votre semainier :</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Lundi </th>
+                    <th>Mardi </th>
+                    <th>Mercredi </th>
+                    <th>Jeudi </th>
+                    <th>Vendredi </th>
+                    <th>Samedi </th>
+                    <th>Dimanche </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                        <button class="btn btn-danger btn-block btn-xs" type="button" id="supprimer">X </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
     <footer>
         <div class="row">
             <div class="col-md-4 col-sm-6 footer-navigation">
