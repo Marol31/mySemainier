@@ -82,3 +82,6 @@ ul {
 li{
   padding-left: 0;
 }
+button.btn.btn-warning.btn-lg{
+  width: 100%;
+}

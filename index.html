@@ -15,17 +15,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-        $("#button").click(function(){
-          event.preventDefault();
-          var jour = $("#jour option:selected").val();
-          var tache = $("#tache").val();
-          $("#test").html(jour);
-          $("<li>"+tache+"</li>").insertBefore($("ul[id="+jour+"]"));
-          $("#tache").val("");
-
-
-
-        });
+                $("#button").click(function(){
+                  event.preventDefault();
+                  var jour = $("#jour option:selected").val();
+                  var tache = $("#tache").val();
+                  $("#test").html(jour);
+                  $("<li>"+tache+"</li>").insertBefore($("ul[id="+jour+"]"));
+                  $("#tache").val("");
+                });
+                $("#envoi").submit(function(){
+                    event.preventDefault();
+                    var tachelundi = $("#lundi").val();
+                    var tachemardi = $("#mardi").val();
+                    $.post('traitement.php',
+                      {
+                          lundi: tachelundi,
+                          mardi: tachemardi
+                    }, function(data) {
+                    alert(data);
+                    });
+                });
 
         });
     </script>
@@ -127,6 +136,14 @@
 
 </tbody>
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-2 col-sm-offset-5 col-xs-6 col-xs-offset-3">
+        <form method="post">
+            <input type="hidden" value=""/>
+            <button class="btn btn-warning btn-lg" id="envoi" type="submit">Button</button>
+        </form>
     </div>
 </div>
 </div>
