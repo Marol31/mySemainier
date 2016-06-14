@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link href="https://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
                 $("#button").click(function(){
@@ -23,18 +24,20 @@
                   $("<li>"+tache+"</li>").insertBefore($("ul[id="+jour+"]"));
                   $("#tache").val("");
                 });
-                $("#envoi").submit(function(){
-                    event.preventDefault();
-                    var tachelundi = $("#lundi").val();
-                    var tachemardi = $("#mardi").val();
-                    $.post('traitement.php',
-                      {
-                          lundi: tachelundi,
-                          mardi: tachemardi
-                    }, function(data) {
-                    alert(data);
-                    });
+
+                $("#pdf").click(function(){
+                  event.preventDefault();
+                  var doc = new jsPDF();
+
+                  doc.setFontSize(40);
+                  doc.text(40, 30, "Octocat loves jsPDF", 4);
+                  doc.save('pdf.pdf');
+
                 });
+
+
+
+
 
         });
     </script>
@@ -97,7 +100,7 @@
             </select> -->
             <div class="form-group"></div>
             <label>Indiquez votre rappel, votre tache ou votre RDV</label>
-            <div class="form-group has-warning">
+            <div class="form-group has-warning" id="monForm">
                 <textarea required maxlength="150" class="form-control input-sm" id="tache"></textarea>
                 <button class="btn btn-primary" id="button" type="submit" >Ajouter</button>
             </div>
@@ -140,9 +143,8 @@
 </div>
 <div class="row">
     <div class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-2 col-sm-offset-5 col-xs-6 col-xs-offset-3">
-        <form method="post">
-            <input type="hidden" value=""/>
-            <button class="btn btn-warning btn-lg" id="envoi" type="submit">Button</button>
+        <form>
+            <button class="btn btn-warning btn-lg" id="pdf" type="submit">Générer PDF</button>
         </form>
     </div>
 </div>

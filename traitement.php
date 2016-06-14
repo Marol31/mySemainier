@@ -1,7 +1,13 @@
 <?php
- $lundi = $_POST("tachelundi");
 
- echo $lundi;
+ $lundi = $_POST["tachelundi"];
+
+if (isset($lundi)){
+  echo $lundi;
+}else{
+  echo "rien a afficher !";
+}
+
 
 
  ?>
