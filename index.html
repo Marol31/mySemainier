@@ -12,6 +12,23 @@
     <link rel="stylesheet" href="assets/css/Pretty-Header.css">
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link href="https://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $("#button").click(function(){
+          event.preventDefault();
+          var jour = $("#jour option:selected").val();
+          var tache = $("#tache").val();
+          $("#test").html(jour);
+          $("<li>"+tache+"</li>").insertBefore($("ul[id="+jour+"]"));
+          $("#tache").val("");
+
+
+
+        });
+
+        });
+    </script>
 </head>
 
 <body>
@@ -30,7 +47,7 @@
     </blockquote>
     <div class="row">
     <div class="col-lg-12 col-md-12">
-        <form class="bootstrap-form-with-validation" action="traitement.php">
+        <form class="bootstrap-form-with-validation">
             <h2 class="text-center">Remplissez votre semaine:</h2>
             <label for="titre">Rentrez la semaine concernée :</label>
             <div class="row">
@@ -50,7 +67,7 @@
                 </div>
             </div>
             <label for="jour">Choisissez le jour</label>
-            <select required class="form-control" name="jour">
+            <select id="jour" required class="form-control" name="jour">
                 <optgroup label="Choisissez le jour">
                     <option value="lundi" selected>Lundi</option>
                     <option value="mardi">Mardi</option>
@@ -72,11 +89,14 @@
             <div class="form-group"></div>
             <label>Indiquez votre rappel, votre tache ou votre RDV</label>
             <div class="form-group has-warning">
-                <textarea required maxlength="150" class="form-control input-sm"></textarea>
-                <button class="btn btn-primary" type="submit">Ajouter</button>
+                <textarea required maxlength="150" class="form-control input-sm" id="tache"></textarea>
+                <button class="btn btn-primary" id="button" type="submit" >Ajouter</button>
             </div>
         </form>
     </div>
+</div>
+<div class="row">
+  <div id="test" class="col-lg-10 col-lg-offset-1" style="background-color:#C0C0C0;height:100px;"></div>
 </div>
 <div class="row">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-sm-push-0 col-xs-10 col-xs-offset-1 col-xs-push-0">
@@ -96,13 +116,13 @@
 </thead>
 <tbody>
 <tr>
-<td data-title="Lundi"><p class="black"><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores est consequuntur doloremque corporis esse, ipsam aut sit veritatis vero maxime?</li></ul></p></td>
-<td data-title="Mardi"><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, mollitia!</li><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, sint!</li></ul></td>
-<td data-title="Mercredi"><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum facilis, velit blanditiis dolore omnis pariatur.</li></ul></td>
-<td data-title="Jeudi"><ul><li>Lorem ipsum dolor sit amet.</td>
-<td data-title="Vendredi"><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos cumque soluta quaerat officiis eum repellendus quod modi dolorem nihil natus! Hic.</li></ul></td>
-<td data-title="Samedi"><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, pariatur!</li></ul></td>
-<td data-title="Dimanche"><ul><li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium mollitia aliquid beatae, molestias quas eos provident corporis iure sequi dolore.</li></ul></td>
+<td data-title="Lundi"><ul id="lundi"></ul></td>
+<td data-title="Mardi"><ul id="mardi"></ul></td>
+<td data-title="Mercredi"><ul id="mercredi"></ul></td>
+<td data-title="Jeudi"><ul id="jeudi"></td>
+<td data-title="Vendredi"><ul id="vendredi"></ul></td>
+<td data-title="Samedi"><ul id="samedi"></ul></td>
+<td data-title="Dimanche"><ul id="dimanche"></ul></td>
 </tr>
 
 </tbody>
