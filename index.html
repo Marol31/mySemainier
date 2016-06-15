@@ -14,30 +14,84 @@
     <link href="https://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.0.16/jspdf.plugin.autotable.js"></script>
+    <!-- <script type="txt/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" scr="assets/js/jspdf.js"></script> -->
     <script type="text/javascript">
         $(document).ready(function() {
+                  //on créer un tableau pour chaque jour de la semaine
+                   tab_lundi = [];
+                   tab_mardi = [];
+                   tab_mercredi = [];
+                   tab_jeudi = [];
+                   tab_vendredi = [];
+                   tab_samedi = [];
+                   tab_dimanche = [];
+
                 $("#button").click(function(){
+                  //on enleve le comportement natif du bouton
                   event.preventDefault();
+
+                  //on récupère le jour choisi dans le select
                   var jour = $("#jour option:selected").val();
+                  //on récupère ce que l'utilisateur a tapé dans le input
                   var tache = $("#tache").val();
-                  $("#test").html(jour);
+
+
+                  //on injecte le texte tapé dans un li au jour choisi dans le tableau
                   $("<li>"+tache+"</li>").insertBefore($("ul[id="+jour+"]"));
+
+                  //on stocke la tache dans le tableau du jour concerné
+                  if(jour==="lundi"){
+                    tab_lundi.push(tache);
+                  };
+                  if(jour==="mardi"){
+                    tab_mardi.push(tache);
+                  };
+                  if(jour==="mercredi"){
+                    tab_mercredi.push(tache);
+                  };
+                  if(jour==="jeudi"){
+                    tab_jeudi.push(tache);
+                  };
+                  if(jour==="vendredi"){
+                    tab_vendredi.push(tache);
+                  };
+                  if(jour==="samedi"){
+                    tab_samedi.push(tache);
+                  };
+                  if(jour==="dimanche"){
+                    tab_dimanche.push(tache);
+                  };
+
+                  // puis on vide le input
                   $("#tache").val("");
+
                 });
 
                 $("#pdf").click(function(){
                   event.preventDefault();
-                  var doc = new jsPDF();
+                  var debut = $("#date_debut").val();
+                  var fin = $("#date_fin").val();
 
-                  doc.setFontSize(40);
-                  doc.text(40, 30, "Octocat loves jsPDF", 4);
-                  doc.save('pdf.pdf');
+                  // var header = function(data) {
+                  // doc.setFontSize(18);
+                  // doc.setTextColor(40);
+                  // doc.setFontStyle('normal');
+                  // doc.text("Semaine du "+debut+" au "+fin, data.settings.margin.left, 50);
+                  // };
+                  // doc.text(20, 40, " ");
+                  // doc.autoTable(columns, rows);
+                  // doc.save('table.pdf');
+
+                  //création du pdf
+                  var doc = new jsPDF('l', 'pt');
+                  var elem = document.getElementById("table");
+                  var res = doc.autoTableHtmlToJson(elem);
+                  doc.autoTable(res.columns, res.data);
+                  doc.save("mySemainier.pdf");
 
                 });
-
-
-
-
 
         });
     </script>
@@ -68,11 +122,11 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <label for="date_debut" class="control-label">Semaine du :</label>
-                                <input type="date" name="date_debut" class="form-control" />
+                                <input type="date" name="date_debut" id="date_debut" class="form-control" />
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <label for="date_fin" class="control-label">Au :</label>
-                                <input type="date" name="date_fin" class="form-control" />
+                                <input type="date" name="date_fin" id="date_fin" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -114,7 +168,7 @@
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-sm-push-0 col-xs-10 col-xs-offset-1 col-xs-push-0">
     <h3>Votre semainier :</h3>
     <div class="responsive-table-line" style="margin:0px auto;">
-        <table class="table table-bordered table-condensed">
+        <table class="table table-bordered table-condensed" id="table">
           <thead>
 <tr>
 <th class="info">Lundi</th>
@@ -128,7 +182,7 @@
 </thead>
 <tbody>
 <tr>
-<td data-title="Lundi"><ul id="lundi"></ul></td>
+<td data-title="Lundi" id="listelundi"><ul id="lundi"></ul></td>
 <td data-title="Mardi"><ul id="mardi"></ul></td>
 <td data-title="Mercredi"><ul id="mercredi"></ul></td>
 <td data-title="Jeudi"><ul id="jeudi"></td>
