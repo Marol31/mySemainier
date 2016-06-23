@@ -19,7 +19,7 @@
     <script type="text/javascript" scr="assets/js/jspdf.js"></script> -->
     <script type="text/javascript">
         $(document).ready(function() {
-                  //on créer un tableau pour chaque jour de la semaine
+                  //on créé un tableau pour chaque jour de la semaine
                    tab_lundi = [];
                    tab_mardi = [];
                    tab_mercredi = [];
@@ -28,7 +28,38 @@
                    tab_samedi = [];
                    tab_dimanche = [];
 
-                $("#button").click(function(){
+                   //affichage par defaut de lundi
+                   var defautLundi = "<p class='lundi'>exemple:</p><li class='lundi'>Faire du sport</li><li class='lundi'>Faire les courses</li>";
+                   //insertion valeur par defautLundi
+                   $(defautLundi).css({color:'#C0C0C0',fontSize:'17px'}).appendTo($("ul[id='lundi'"));
+                   //enregistre la valeur html de lundi dans une variable
+                    affichageLundi = $("ul[id='lundi']").html();
+                   //affichage par defaut de Mardi
+                   var defautMardi = "<p class='mardi'>exemple:</p><li class='mardi'>9h00 : RDV Médical</li><li class='mardi'>11h30 : Déjeûner en ville</li><li class='mardi'>Faire les courses</li>";
+                   //insertion valeur par defautMardi
+                   $(defautMardi).css('color', '#C0C0C0').appendTo($("ul[id='mardi'"));
+                   //enregistre la valeur html de mardi dans une variable
+                    affichageMardi = $("ul[id='mardi']").html();
+                   //affichage par defaut de Mercredi
+                   var defautMercredi = "<p class='mercredi'>exemple:</p><li class='mercredi'>9h00 : RDV Médical</li><li class='mercredi'>Diner chez Bernard</li>";
+                   //insertion valeur par defautMercredi
+                   $(defautMercredi).css('color', '#C0C0C0').appendTo($("ul[id='mercredi'"));
+                   //enregistre la valeur html de mercredi dans une variable
+                    affichageMercredi = $("ul[id='mercredi']").html();
+                   //affichage par defaut de Jeudi
+                   var defautJeudi = "<p class='jeudi'>exemple:</p><li class='jeudi'>9h00 : RDV Médical</li><li class='jeudi'>Anniversaire Sacha</li><li class='jeudi'>14h00 : RDV Dentiste</li>";
+                   //insertion valeur par defautJeudi
+                   $(defautJeudi).css('color', '#C0C0C0').appendTo($("ul[id='jeudi'"));
+                   //enregistre la valeur html de jeudi dans une variable
+                    affichageJeudi = $("ul[id='jeudi']").html();
+                   //affichage par defaut de Vendredi
+                   var defautVendredi = "<p class='vendredi'>exemple:</p><li class='vendredi'>Aller à la piscine</li><li class='vendredi'>Pique-nique au parc</li>";
+                   //insertion valeur par defautVendredi
+                   $(defautVendredi).css('color', '#C0C0C0').appendTo($("ul[id='vendredi'"));
+                   //enregistre la valeur html de jeudi dans une variable
+                    affichageVendredi = $("ul[id='vendredi']").html();
+
+                   $("#button").click(function(){
                   //on enleve le comportement natif du bouton
                   event.preventDefault();
 
@@ -37,13 +68,34 @@
                   //on récupère ce que l'utilisateur a tapé dans le input
                   var tache = $("#tache").val();
 
+                  //DEBUT DE TEST INPUT
+                  if ( tache == ''){
+                    alert("vous devez d'abords saisir une tâche ou un rappel.");
+                  }else{
+                          //on repupere la valeur se trouvant dans le jour sélectionné
+                          var affichageDefautJour = $("ul[id="+jour+"]").html();
 
-                  //on injecte le texte tapé dans un li au jour choisi dans le tableau
-                  $("<li>"+tache+"</li>").insertBefore($("ul[id="+jour+"]"));
+                          //on teste la valeur trouvée
+                          //si la valeur par defaut est dans le ul,
+                          if ((affichageDefautJour==affichageLundi) || (affichageDefautJour==affichageMardi) || (affichageDefautJour==affichageMercredi) || (affichageDefautJour==affichageJeudi) || (affichageDefautJour==affichageVendredi) ){
+                            // on enlève la valeur par défaut
+                            $("li[class='"+jour+"'],p[class='"+jour+"']").remove();
+
+                            //puis on injecte le texte tapé dans un li au jour choisi dans le tableau
+                            $("<li>"+tache+"</li>").appendTo($("ul[id="+jour+"]"));
+                          }else{
+                            // on injecte le texte tapé dans un li au jour choisi dans le tableau
+                            $("<li>"+tache+"</li>").appendTo($("ul[id="+jour+"]"));
+                          }
+                  }
+                  // FIN DE TEST INPUT
+
+
 
                   //on stocke la tache dans le tableau du jour concerné
                   if(jour==="lundi"){
-                    tab_lundi.push(tache);
+
+                      tab_lundi.push("<li>"+tache+"</li>");
                   };
                   if(jour==="mardi"){
                     tab_mardi.push(tache);
@@ -71,25 +123,68 @@
 
                 $("#pdf").click(function(){
                   event.preventDefault();
-                  var debut = $("#date_debut").val();
-                  var fin = $("#date_fin").val();
 
+                   debut = $("#date_debut").val();
+                   fin = $("#date_fin").val();
+
+                     // on enlève la valeur par défaut
+                     $("li[class='lundi'],p[class='lundi'],li[class='mardi'],p[class='mardi'],li[class='mercredi'],p[class='mercredi'],li[class='jeudi'],p[class='jeudi'],li[class='vendredi'],p[class='vendredi']").remove();
+
+                  function generate() {
+
+                  var doc = new jsPDF('l', 'pt');
+
+                  var res = doc.autoTableHtmlToJson(document.getElementById("table"));
+                  console.log(res);
+                  doc.autoTable(res.columns, res.data, {margin: {top: 80}});
+
+                  var header = function(data) {
+                  doc.setFontSize(18);
+                  doc.setTextColor(40);
+                  doc.setFontStyle('normal');
+                  //doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 20, 50, 50);
+                  doc.text("Semaine du "+debut+" au "+fin, data.settings.margin.left, 50);
+                  };
+
+                  var options = {
+                  beforePageContent: header,
+                  margin: {
+                  top: 120
+                  },
+                  startY: doc.autoTableEndPosY() + 20
+                  };
+
+                //  doc.autoTable(res.columns, res.data, options);
+
+                  doc.save("table.pdf");
+
+                }
+
+                  //on teste si les dates ont été remplies
+                  if ((debut=='')&&(fin=='')){
+                    alert('Vous n\'avez pas  renseigner de dates ?');
+
+                  }else{
+
+                  generate();
+
+                  }
+
+
+
+
+                  //création du pdf
+                  // var doc = new jsPDF('l', 'pt');
                   // var header = function(data) {
                   // doc.setFontSize(18);
                   // doc.setTextColor(40);
                   // doc.setFontStyle('normal');
                   // doc.text("Semaine du "+debut+" au "+fin, data.settings.margin.left, 50);
                   // };
-                  // doc.text(20, 40, " ");
-                  // doc.autoTable(columns, rows);
-                  // doc.save('table.pdf');
-
-                  //création du pdf
-                  var doc = new jsPDF('l', 'pt');
-                  var elem = document.getElementById("table");
-                  var res = doc.autoTableHtmlToJson(elem);
-                  doc.autoTable(res.columns, res.data);
-                  doc.save("mySemainier.pdf");
+                  // var elem = document.getElementById("table");
+                  // var res = doc.autoTableHtmlToJson(elem);
+                  // doc.autoTable(res.columns, res.data);
+                  // doc.save("mySemainier.pdf");
 
                 });
 
